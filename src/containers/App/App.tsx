@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.scss';
+import Weather from '../Weather/Weather'
 
 const App: React.FC = () => {
     return (
         <div className="app">
-            <h1 className="app__title">Hello World</h1>
+            <Weather />
         </div>
     );
 }
