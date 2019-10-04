@@ -1,4 +1,4 @@
-class Location {
+class LocationService {
     private lat: number | null = null;
     private lng: number | null = null;
     public isGeolocationEnabled: boolean = false;
@@ -25,4 +25,4 @@ class Location {
     };
 }
 
-export default Location;
+export default LocationService;
