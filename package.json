@@ -36,7 +36,7 @@
     ]
   },
   "devDependencies": {
-    "faker": "^4.1.0",
-    "@types/faker": "^4.1.6"
+    "@types/faker": "^4.1.6",
+    "faker": "^4.1.0"
   }
 }

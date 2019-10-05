@@ -1,16 +1,19 @@
-import axios from 'axios';
+import {AxiosError, AxiosInstance, AxiosResponse} from "axios";
 
 class WeatherService {
-    constructor(private apiUrl: string, private apiKey: string) {
+    constructor(private axios: AxiosInstance, private apiUrl: string, private apiKey: string) {
     }
 
     fetchByLatLng = async (lat: string, lng: string) => {
-        try {
-            const { data } = await axios.get(this.getRequestUrl(lat, lng));
-            return data;
-        } catch (e) {
-            console.warn('Could not fetch data', e);
-        }
+
+        return new Promise<AxiosResponse | AxiosError>((resolve, reject) => {
+            this.axios.get(this.getRequestUrl(lat, lng))
+                .then((res: AxiosResponse) => {
+                    resolve(res.data);
+                }).catch((error: AxiosError) => {
+                    reject(error);
+                });
+        });
     };
 
     getRequestUrl = (lat: string, lng: string): string => {
