@@ -1,4 +1,5 @@
 import {AxiosError, AxiosInstance, AxiosResponse} from "axios";
+import WeatherResponseModel from "../../models/WeatherResponse/WeatherResponse.model";
 
 class WeatherService {
     constructor(private axios: AxiosInstance, private apiUrl: string, private apiKey: string) {
@@ -6,7 +7,7 @@ class WeatherService {
 
     fetchByLatLng = async (lat: number, lng: number) => {
 
-        return new Promise<AxiosResponse | AxiosError>((resolve, reject) => {
+        return new Promise<WeatherResponseModel>((resolve, reject) => {
             this.axios.get(this.getRequestUrl(lat, lng))
                 .then((res: AxiosResponse) => {
                     resolve(res.data);
