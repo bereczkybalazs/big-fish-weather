@@ -5,8 +5,8 @@ jest.mock('axios');
 
 let fakeUrl: string;
 let fakeAPIKey: string;
-let fakeLat: string;
-let fakeLng: string;
+let fakeLat: number;
+let fakeLng: number;
 let transformedUrl: string;
 let weather: WeatherService;
 let mockAxios: jest.Mocked<typeof axios>;
@@ -14,9 +14,9 @@ let mockAxios: jest.Mocked<typeof axios>;
 beforeEach(() => {
     fakeUrl = faker.internet.url();
     fakeAPIKey = faker.random.alphaNumeric(10);
-    fakeLat = faker.address.latitude();
-    fakeLng = faker.address.longitude();
-    transformedUrl = `${fakeUrl}?appid=${fakeAPIKey}&lat=${fakeLat}&lon=${fakeLng}`;
+    fakeLat = +faker.address.latitude();
+    fakeLng = +faker.address.longitude();
+    transformedUrl = `${fakeUrl}?appid=${fakeAPIKey}&lat=${fakeLat}&lon=${fakeLng}&units=metric`;
 
     mockAxios = axios as jest.Mocked<typeof axios>;
     weather = new WeatherService(
