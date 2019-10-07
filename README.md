@@ -1,5 +1,19 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Requirements
+
+nvm: https://github.com/nvm-sh/nvm
+
+git: https://www.git-scm.com/downloads
+
+## Initial commands
+
+### `nvm use`
+Use it always before typing an npm command. It will set the node version to the proper one.
+
+### `npm install`
+Use it after running `nvm use` to install the project's dependencies.
+
 ## Available Scripts
 
 In the project directory, you can run:
