@@ -116,13 +116,13 @@ class Weather extends React.Component<{}, State> {
                 {
                     this.state.dataReceived &&
                     <div className="weather">
-                        <h2 className="weather__location">
-                            {`${this.state.weather.sys.country}, ${this.state.weather.name}`}
-                        </h2>
                         <WeatherInfo
                             weather={this.getWeather()}
                             temperature={this.state.weather.main.temp}
                         />
+                        <h2 className="weather__location">
+                            {`${this.state.weather.sys.country}, ${this.state.weather.name}`}
+                        </h2>
                     </div>
                 }
                 {!this.state.geolocationEnabled && <PermissionDenied/>}
