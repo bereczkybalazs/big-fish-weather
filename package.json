@@ -36,7 +36,10 @@
     ]
   },
   "devDependencies": {
+    "@types/enzyme": "^3.10.3",
     "@types/faker": "^4.1.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "faker": "^4.1.0"
   }
 }

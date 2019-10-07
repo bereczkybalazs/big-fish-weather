@@ -2,7 +2,12 @@ import React from "react";
 import WeatherModel from "../../models/CurrentWeatherResponse/Weather.model";
 import './WeatherInfo.scss';
 
-const WeatherInfo: React.FunctionComponent<{weather: WeatherModel, temperature: number}> = (props) => (
+const WeatherInfo: React.FunctionComponent<{
+        weather: WeatherModel,
+        temperature: number,
+        country: string,
+        location: string
+}> = (props) => (
 
     <div className="weather-info">
         <img
@@ -16,6 +21,9 @@ const WeatherInfo: React.FunctionComponent<{weather: WeatherModel, temperature: 
         <div className="weather-info__description">
             {props.weather.description}
         </div>
+        <h2 className="weather-info__location">
+            {`${props.country}, ${props.location}`}
+        </h2>
     </div>
 );
 

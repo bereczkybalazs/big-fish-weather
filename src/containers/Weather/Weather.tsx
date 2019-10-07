@@ -5,7 +5,6 @@ import CurrentWeatherResponseModel from "../../models/CurrentWeatherResponse/Cur
 import WeatherInfo from "../../components/WeatherInfo/WeatherInfo";
 import Loading from "../../components/Loading/Loading";
 import PermissionDenied from "../../components/PermissionDenied/PermissionDenied";
-import './Weather.scss';
 
 interface State {
     weather: CurrentWeatherResponseModel;
@@ -114,19 +113,16 @@ class Weather extends React.Component<{}, State> {
         return (
             <React.Fragment>
                 {this.state.loading && <Loading />}
+                {!this.state.geolocationEnabled && <PermissionDenied />}
                 {
                     this.state.dataReceived &&
-                    <div className="weather">
-                        <WeatherInfo
-                            weather={this.getWeather()}
-                            temperature={this.state.weather.main.temp}
-                        />
-                        <h2 className="weather__location">
-                            {`${this.state.weather.sys.country}, ${this.state.weather.name}`}
-                        </h2>
-                    </div>
+                    <WeatherInfo
+                        weather={this.getWeather()}
+                        temperature={this.state.weather.main.temp}
+                        country={this.state.weather.sys.country}
+                        location={this.state.weather.name}
+                    />
                 }
-                {!this.state.geolocationEnabled && <PermissionDenied/>}
             </React.Fragment>
         );
     }
