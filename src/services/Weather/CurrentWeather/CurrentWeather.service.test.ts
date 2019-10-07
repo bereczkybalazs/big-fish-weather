@@ -1,4 +1,4 @@
-import WeatherService from "./Weather.service";
+import CurrentWeatherService from "./CurrentWeatherService";
 import faker from 'faker';
 import axios from 'axios';
 jest.mock('axios');
@@ -8,7 +8,7 @@ let fakeAPIKey: string;
 let fakeLat: number;
 let fakeLng: number;
 let transformedUrl: string;
-let weather: WeatherService;
+let weather: CurrentWeatherService;
 let mockAxios: jest.Mocked<typeof axios>;
 
 beforeEach(() => {
@@ -19,7 +19,7 @@ beforeEach(() => {
     transformedUrl = `${fakeUrl}?appid=${fakeAPIKey}&lat=${fakeLat}&lon=${fakeLng}&units=metric`;
 
     mockAxios = axios as jest.Mocked<typeof axios>;
-    weather = new WeatherService(
+    weather = new CurrentWeatherService(
         mockAxios,
         fakeUrl,
         fakeAPIKey
