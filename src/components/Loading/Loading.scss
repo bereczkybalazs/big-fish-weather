@@ -1,0 +1,48 @@
+$animation-size: 128px;
+$animation-color: grey;
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    &__animation {
+        display: inline-block;
+        position: relative;
+        width: $animation-size;
+        height: $animation-size;
+        margin-bottom: 1rem;
+        div {
+            position: absolute;
+            border: 16px solid $animation-color;
+            opacity: 1;
+            border-radius: 50%;
+            animation: loading 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+            &:nth-child(2) {
+                animation-delay: -0.5s;
+            }
+        }
+    }
+    &__text {
+        color: grey;
+    }
+}
+
+@keyframes loading {
+    0% {
+        top: 56px;
+        left: 56px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: -2px;
+        left: -2px;
+        width: 116px;
+        height: 116px;
+        opacity: 0;
+    }
+}

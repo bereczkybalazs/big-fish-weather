@@ -1,17 +1,14 @@
 import React from 'react';
 import CurrentWeatherInstance from "../../services/Weather/CurrentWeather/CurrentWeather.instance";
-import ForecastWeatherResponseModel from "../../models/ForecastWeatherResponse/ForecastWeatherResponse.model";
 import {AxiosError} from "axios";
 import CurrentWeatherResponseModel from "../../models/CurrentWeatherResponse/CurrentWeatherResponse.model";
-import CloudsModel from "../../models/CurrentWeatherResponse/Clouds.model";
-import CoordsModel from "../../models/CurrentWeatherResponse/CoordsModel";
-import MainWeatherModel from "../../models/CurrentWeatherResponse/MainWeather.model";
-import SysModel from "../../models/CurrentWeatherResponse/Sys.model";
-import WeatherModel from "../../models/CurrentWeatherResponse/Weather.model";
-import WindModel from "../../models/CurrentWeatherResponse/Wind.model";
+import WeatherInfo from "../../components/WeatherInfo/WeatherInfo";
+import Loading from "../../components/Loading/Loading";
 
 interface State {
     weather: CurrentWeatherResponseModel;
+    loading: boolean;
+    dataReceived: boolean;
 }
 
 class Weather extends React.Component<{}, State> {
@@ -52,16 +49,32 @@ class Weather extends React.Component<{}, State> {
                 deg: 0,
                 speed: 0
             }
-        }
+        },
+        loading: false,
+        dataReceived: false
     };
 
     async componentDidMount() {
         await this.fetchWeather();
     }
 
+    getWeather () {
+        return this.state.weather.weather[0] || {};
+    }
+
+    toggleLoading (loading: boolean) {
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                loading: loading
+            }
+        });
+    }
+
     async fetchWeather() {
         if (!!navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
+                this.toggleLoading(true);
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
                 CurrentWeatherInstance.getInstance().fetchByLatLng(
@@ -71,24 +84,36 @@ class Weather extends React.Component<{}, State> {
                     this.setState((prevState) => {
                         return {
                             ...prevState,
-                            weather: res
+                            weather: res,
+                            dataReceived: true
                         };
                     });
+                    this.toggleLoading(false);
                 }).catch((e: AxiosError) => {
                     console.warn('Could not fetch weather');
+                    this.toggleLoading(false);
                 })
             });
         }
-
     }
 
     render(): React.ReactElement<any>{
         return (
-            <div className="weather">
-                <h2 className="weather__location">
-                    {`${this.state.weather.sys.country}, ${this.state.weather.name}`}
-                </h2>
-            </div>
+            <React.Fragment>
+                {this.state.loading && <Loading />}
+                {
+                    this.state.dataReceived &&
+                    <div className="weather">
+                        <h2 className="weather__location">
+                            {`${this.state.weather.sys.country}, ${this.state.weather.name}`}
+                        </h2>
+                        <WeatherInfo
+                            weather={this.getWeather()}
+                            temperature={this.state.weather.main.temp}
+                        />
+                    </div>
+                }
+            </React.Fragment>
         );
     }
 }
