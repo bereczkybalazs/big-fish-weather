@@ -1,0 +1,9 @@
+@import '../../utils/scss/FlexCenterMixin';
+@import '../../utils/scss/Colors';
+
+$weather-info-text-color: $text-color;
+
+.weather-info {
+    @include flex-center;
+    color: $text-color;
+}

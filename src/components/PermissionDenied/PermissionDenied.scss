@@ -1,4 +1,6 @@
-$permission-denied-text-color: red;
+@import '../../utils/scss/Colors';
+
+$permission-denied-text-color: $error-text-color;
 
 .permission-denied {
     &__image {

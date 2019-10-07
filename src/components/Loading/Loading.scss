@@ -1,12 +1,11 @@
+@import '../../utils/scss/Colors';
+@import '../../utils/scss/FlexCenterMixin';
+
 $animation-size: 128px;
-$animation-color: grey;
+$animation-color: $text-color;
 
 .loading {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    @include flex-center;
 
     &__animation {
         display: inline-block;

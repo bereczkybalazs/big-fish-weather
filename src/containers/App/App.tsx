@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.scss';
 import Weather from '../Weather/Weather'
 
 const App: React.FC = () => {
@@ -8,6 +7,6 @@ const App: React.FC = () => {
             <Weather />
         </div>
     );
-}
+};
 
 export default App;

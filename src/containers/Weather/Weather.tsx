@@ -5,6 +5,7 @@ import CurrentWeatherResponseModel from "../../models/CurrentWeatherResponse/Cur
 import WeatherInfo from "../../components/WeatherInfo/WeatherInfo";
 import Loading from "../../components/Loading/Loading";
 import PermissionDenied from "../../components/PermissionDenied/PermissionDenied";
+import './Weather.scss';
 
 interface State {
     weather: CurrentWeatherResponseModel;

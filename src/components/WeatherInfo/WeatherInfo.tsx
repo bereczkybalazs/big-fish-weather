@@ -1,5 +1,6 @@
 import React from "react";
 import WeatherModel from "../../models/CurrentWeatherResponse/Weather.model";
+import './WeatherInfo.scss';
 
 const WeatherInfo: React.FunctionComponent<{weather: WeatherModel, temperature: number}> = (props) => (
 
