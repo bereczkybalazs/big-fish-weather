@@ -1,0 +1,17 @@
+$permission-denied-text-color: red;
+
+.permission-denied {
+    &__image {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    &__text {
+        color: $permission-denied-text-color;
+        animation: blink-animation 0.1s steps(5, start) infinite;
+    }
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}

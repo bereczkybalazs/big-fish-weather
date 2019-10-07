@@ -4,11 +4,13 @@ import {AxiosError} from "axios";
 import CurrentWeatherResponseModel from "../../models/CurrentWeatherResponse/CurrentWeatherResponse.model";
 import WeatherInfo from "../../components/WeatherInfo/WeatherInfo";
 import Loading from "../../components/Loading/Loading";
+import PermissionDenied from "../../components/PermissionDenied/PermissionDenied";
 
 interface State {
     weather: CurrentWeatherResponseModel;
     loading: boolean;
     dataReceived: boolean;
+    geolocationEnabled: boolean;
 }
 
 class Weather extends React.Component<{}, State> {
@@ -51,7 +53,8 @@ class Weather extends React.Component<{}, State> {
             }
         },
         loading: false,
-        dataReceived: false
+        dataReceived: false,
+        geolocationEnabled: true
     };
 
     async componentDidMount() {
@@ -93,6 +96,15 @@ class Weather extends React.Component<{}, State> {
                     console.warn('Could not fetch weather');
                     this.toggleLoading(false);
                 })
+            }, error => {
+                if (error.code === error.PERMISSION_DENIED) {
+                    this.setState((prevState) => {
+                        return {
+                            ...prevState,
+                            geolocationEnabled: false
+                        }
+                    })
+                }
             });
         }
     }
@@ -113,6 +125,7 @@ class Weather extends React.Component<{}, State> {
                         />
                     </div>
                 }
+                {!this.state.geolocationEnabled && <PermissionDenied/>}
             </React.Fragment>
         );
     }
