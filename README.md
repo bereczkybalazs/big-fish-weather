@@ -1,5 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Big Fish Weather app
+
 [![Build Status](https://travis-ci.org/bereczkybalazs/big-fish-weather.svg?branch=master)](https://travis-ci.org/bereczkybalazs/big-fish-weather)
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Requirements
 
